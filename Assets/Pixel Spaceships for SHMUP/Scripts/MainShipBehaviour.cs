@@ -7,6 +7,9 @@ public class MainShipBehaviour : MonoBehaviour
 
     private Camera mainCamera;
 
+    public ProjectTileBehaviour ProjectTilePrefab;
+    public Transform LaunchOffset;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,11 @@ public class MainShipBehaviour : MonoBehaviour
     void Update()
     {
         FollowMousePosition();
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(ProjectTilePrefab, LaunchOffset.position, transform.rotation);
+        }
     }
 
     private void FollowMousePosition()
