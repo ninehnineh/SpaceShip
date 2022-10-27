@@ -18,11 +18,22 @@ public class ProjectTileBehaviour : MonoBehaviour
     {
         transform.position += transform.up * Time.deltaTime * Speed;
 
+        if (transform.position.magnitude > 10f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject);
+        EnemyBehaviour e = other.collider.GetComponent<EnemyBehaviour>();
+
+        if (e != null)
+        {   
+            Destroy(gameObject);
+            e.DestroyEnemyShip();
+            e.animatora();
+        }
 
     }
 }
