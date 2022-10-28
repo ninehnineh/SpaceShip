@@ -5,31 +5,40 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
 
-    public ProjectTileBehaviour ProjectTilePrefab;
-    public Transform LaunchOffset;
+    public float bulletPerSec = 1;
 
-    Animator animator;
-    // Start is called before the first frame update
+    private float perSecShot;
+
+    public GameObject bullet;
+
+    private float counter = 0f;
+
     void Start()
     {
         GetComponent<Animator>().enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        perSecShot = 1f / bulletPerSec;
+        counter += Time.deltaTime;
+        if (counter >= perSecShot)
+        {
+            Shot();
+            counter = 0;
+        }
     }
 
-    public void DestroyEnemyShip()
+    private void Shot()
     {
-        Destroy(gameObject);
-        Debug.Log("pew!");
+        GameObject bull = Instantiate(bullet, transform.position, Quaternion.identity);
     }
 
-    public void animatora()
+    public async void Explodes()
     {
         GetComponent<Animator>().enabled = true;
-        Debug.Log("hell yeah!");
+        await System.Threading.Tasks.Task.Delay(700);
+        Destroy(gameObject);
     }
+
 }

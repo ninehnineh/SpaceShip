@@ -8,6 +8,7 @@ public class MainShipBehaviour : MonoBehaviour
     private Camera mainCamera;
 
     public ProjectTileBehaviour ProjectTilePrefab;
+
     public Transform LaunchOffset;
 
     float fireSpeed = 0.5f;
@@ -21,7 +22,8 @@ public class MainShipBehaviour : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        
+        GetComponent<Animator>().enabled = false;
+
     }
 
     // Update is called once per frame
@@ -50,5 +52,12 @@ public class MainShipBehaviour : MonoBehaviour
     private Vector2 GetWorldPositionFromMouse()
     {
         return mainCamera.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    public async void Explodes()
+    {
+        GetComponent<Animator>().enabled = true;
+        await System.Threading.Tasks.Task.Delay(700);
+        Destroy(gameObject);
     }
 }
