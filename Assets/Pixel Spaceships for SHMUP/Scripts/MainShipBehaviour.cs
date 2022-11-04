@@ -24,11 +24,21 @@ public class MainShipBehaviour : MonoBehaviour
 
     public GameController gameController;
 
+    AudioSource audioSource;
+
+    public AudioClip shootSound;
+    public AudioClip deadSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
         GetComponent<Animator>().enabled = false;
+
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.enabled = false;
 
     }
 
@@ -43,6 +53,8 @@ public class MainShipBehaviour : MonoBehaviour
         {
             Instantiate(ProjectTilePrefab, LaunchOffset.position, transform.rotation);
             timer = 0;
+            PlaySound(shootSound);
+
         }
 
         if (!isAlive)
@@ -52,15 +64,6 @@ public class MainShipBehaviour : MonoBehaviour
 
     }
 
-    private void isDestroyed()
-    {
-
-    }
-
-    private void FixedUpdate()
-    {
-
-    }
     private void FollowMousePosition()
     {
         transform.position = GetWorldPositionFromMouse();
@@ -82,8 +85,13 @@ public class MainShipBehaviour : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         FindObjectOfType<GameController>().EndGame();
-        
+
     }
 
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.enabled = true;
+        audioSource.PlayOneShot(clip);
+    }
 
 }

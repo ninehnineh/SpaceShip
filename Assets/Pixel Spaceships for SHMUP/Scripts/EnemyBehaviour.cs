@@ -12,10 +12,12 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject bullet;
 
     private float counter = 0f;
-
+    AudioSource audioSource;
     void Start()
     {
         GetComponent<Animator>().enabled = false;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.enabled = false;
     }
 
     void Update()
@@ -39,6 +41,12 @@ public class EnemyBehaviour : MonoBehaviour
         GetComponent<Animator>().enabled = true;
         await System.Threading.Tasks.Task.Delay(700);
         Destroy(gameObject);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.enabled = true;
+        audioSource.PlayOneShot(clip);
     }
 
     // public void OnCollisionEnter2D(Collider2D other)
