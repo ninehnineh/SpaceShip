@@ -41,4 +41,11 @@ public class EnemyBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // public void OnCollisionEnter2D(Collider2D other)
+    // {
+    //     if (other.tag == "Player")
+    //     {
+    //         Debug.Log("cham");
+    //     }
+    // }
 }

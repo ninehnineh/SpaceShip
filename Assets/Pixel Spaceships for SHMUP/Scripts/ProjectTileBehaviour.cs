@@ -72,6 +72,7 @@ public class ProjectTileBehaviour : MonoBehaviour
             {
                 enemy.Explodes();
                 exploded();
+                Score.scoreValue += 5;
             }
         }
 

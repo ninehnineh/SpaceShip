@@ -18,6 +18,12 @@ public class MainShipBehaviour : MonoBehaviour
     float timer;
     public float waitingTime = 0.2f;
 
+    private bool isAlive = true;
+
+    GameOverSreen gameOverSreen;
+
+    public GameController gameController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +44,17 @@ public class MainShipBehaviour : MonoBehaviour
             Instantiate(ProjectTilePrefab, LaunchOffset.position, transform.rotation);
             timer = 0;
         }
+
+        if (!isAlive)
+        {
+            gameOverSreen.Setup(0);
+        }
+
+    }
+
+    private void isDestroyed()
+    {
+
     }
 
     private void FixedUpdate()
@@ -59,5 +76,14 @@ public class MainShipBehaviour : MonoBehaviour
         GetComponent<Animator>().enabled = true;
         await System.Threading.Tasks.Task.Delay(700);
         Destroy(gameObject);
+        isAlive = false;
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        FindObjectOfType<GameController>().EndGame();
+        
+    }
+
+
 }
