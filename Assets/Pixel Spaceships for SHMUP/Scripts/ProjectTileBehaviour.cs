@@ -15,6 +15,9 @@ public class ProjectTileBehaviour : MonoBehaviour
 
     private Vector3 moveDirect;
 
+    public AudioClip fallingSound;
+    public AudioClip deadSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +66,7 @@ public class ProjectTileBehaviour : MonoBehaviour
             {
                 mainShip.Explodes();
                 exploded();
+                mainShip.PlaySound(deadSound);
             }
         }
         else
@@ -72,6 +76,7 @@ public class ProjectTileBehaviour : MonoBehaviour
             {
                 enemy.Explodes();
                 exploded();
+                enemy.PlaySound(fallingSound);
                 Score.scoreValue += 5;
             }
         }

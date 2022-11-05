@@ -103,6 +103,8 @@ MonoBehaviour:
   ProjectTilePrefab: {fileID: -7456862751071491374, guid: db946e6bde6d4934a943d15a18606d85, type: 3}
   LaunchOffset: {fileID: 4758758083398396895}
   waitingTime: 0.2
+  gameController: {fileID: 0}
+  shootSound: {fileID: 0}
 --- !u!61 &1256669388680664571
 BoxCollider2D:
   m_ObjectHideFlags: 0
