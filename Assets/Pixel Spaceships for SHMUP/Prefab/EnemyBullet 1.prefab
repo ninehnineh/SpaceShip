@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7945224295513337181}
   - component: {fileID: -4218158385451405432}
   m_Layer: 0
-  m_Name: EnemyBullet
+  m_Name: EnemyBullet 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 1419915059
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 955645b98f142a848abeaf7acea2a654, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff86d848a0a2abc4dac974e7d0f918a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 4.5
   isEnemyBullet: 1
-  damage: 30
+  damage: 20
   fallingSound: {fileID: 0}
   deadSound: {fileID: 8300000, guid: 9a4dc7253f162ce458654dd918220255, type: 3}
 --- !u!58 &5647140221537291759

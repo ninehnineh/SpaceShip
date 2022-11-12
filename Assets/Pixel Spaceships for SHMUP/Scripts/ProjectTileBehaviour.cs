@@ -44,7 +44,7 @@ public class ProjectTileBehaviour : MonoBehaviour
 
         transform.position += new Vector3(0, Time.deltaTime * Speed * (isEnemyBullet ? -1 : 1), 0);
 
-        if (liveTime > 3)
+        if (liveTime > (isEnemyBullet ? 3 : 3.5))
         {
             exploded();
         }
@@ -59,7 +59,7 @@ public class ProjectTileBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private async void OnCollisionEnter2D(Collision2D other)
     {
 
         if (isEnemyBullet)
@@ -71,10 +71,6 @@ public class ProjectTileBehaviour : MonoBehaviour
                 Debug.Log(damages + " / " + damage);
                 mainShip.Explodes(damages);
                 exploded();
-                mainShip.PlaySound(deadSound);
-                await System.Threading.Tasks.Task.Delay(700);
-                SceneManager.LoadScene("TryAgain");
-
             }
         }
         else

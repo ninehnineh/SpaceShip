@@ -16,23 +16,49 @@ public class EnemyBehaviour : MonoBehaviour
     private float counter = 0f;
     AudioSource audioSource;
 
+    public float coolEngineTime = 0;
+    public float fireTime = 0;
+
     public BloodbarBehaviour HpBar;
 
     void Start()
     {
         GetComponent<Animator>().enabled = false;
         audioSource = GetComponent<AudioSource>();
-        audioSource.enabled = false;
+        if (audioSource != null)
+        {
+            audioSource.enabled = false;
+        }
+        this.HpBar.capacity = this.hp;
     }
+
+    private float sleepCounter = 0;
+
+    private float fireCounter = 0;
+
+    private bool shoot = true;
 
     void Update()
     {
         perSecShot = 1f / bulletPerSec;
         counter += Time.deltaTime;
-        if (counter >= perSecShot)
+        if (counter >= perSecShot && shoot)
         {
             Shot();
             counter = 0;
+        }
+
+        fireCounter -= Time.deltaTime;
+        if (fireCounter <= 0)
+        {
+            shoot = false;
+            sleepCounter -= Time.deltaTime;
+            if (sleepCounter <= 0)
+            {
+                shoot = true;
+                fireCounter = fireTime;
+                sleepCounter = coolEngineTime;
+            }
         }
     }
 
@@ -44,7 +70,10 @@ public class EnemyBehaviour : MonoBehaviour
     public async void Explodes(float damage)
     {
         hp -= damage;
-        HpBar.DamagedBy(damage);
+        if (HpBar != null)
+        {
+            HpBar.DamagedBy(damage);
+        }
         if (hp <= 0)
         {
             GetComponent<Animator>().enabled = true;
@@ -55,8 +84,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        audioSource.enabled = true;
-        audioSource.PlayOneShot(clip);
+        if (audioSource != null)
+        {
+            audioSource.enabled = true;
+            audioSource.PlayOneShot(clip);
+        }
     }
 
     // public void OnCollisionEnter2D(Collider2D other)

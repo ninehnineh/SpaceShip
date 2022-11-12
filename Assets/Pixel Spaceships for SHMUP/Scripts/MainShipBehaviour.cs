@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainShipBehaviour : MonoBehaviour
 {
+
+    public float damage;
 
     private Camera mainCamera;
 
@@ -53,7 +56,8 @@ public class MainShipBehaviour : MonoBehaviour
 
         if (Input.GetButton("Fire1") && timer > waitingTime)
         {
-            Instantiate(ProjectTilePrefab, LaunchOffset.position, transform.rotation);
+            ProjectTileBehaviour projectTile = Instantiate(ProjectTilePrefab, LaunchOffset.position, transform.rotation);
+            projectTile.damage = this.damage;
             timer = 0;
             PlaySound(shootSound);
 
@@ -84,11 +88,13 @@ public class MainShipBehaviour : MonoBehaviour
         hpBar.GetComponent<BloodbarBehaviour>().DamagedBy(damage);
         if (hp <= 0)
         {
+            PlaySound(deadSound);
             GetComponent<Animator>().enabled = true;
-            await System.Threading.Tasks.Task.Delay(700);
+            await System.Threading.Tasks.Task.Delay(1400);
             Destroy(gameObject);
             isAlive = false;
             Debug.Log("Over " + hp);
+            SceneManager.LoadScene("TryAgain");
         }
     }
 
