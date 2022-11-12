@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Wave
@@ -47,6 +48,7 @@ public class WaveSpawner : MonoBehaviour
             }
             else
             {
+                SceneManager.LoadScene("Finish");
                 Debug.Log("Game Finish");
                 finishText.SetActive(true);
             }
