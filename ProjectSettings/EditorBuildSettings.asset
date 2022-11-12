@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Pixel Spaceships for SHMUP/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Pixel Spaceships for SHMUP/Scenes/Finish.unity
+    guid: baa51929d4f85bf4090248179f7e84ea
+  - enabled: 1
+    path: Assets/Pixel Spaceships for SHMUP/Scenes/TryAgain.unity
+    guid: 0caef0fb7bbb4e94db0229d22f0e095f
   m_configObjects: {}
