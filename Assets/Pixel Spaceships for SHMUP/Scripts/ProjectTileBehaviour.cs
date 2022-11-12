@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 public class ProjectTileBehaviour : MonoBehaviour
 {
 
@@ -67,6 +68,9 @@ public class ProjectTileBehaviour : MonoBehaviour
                 mainShip.Explodes();
                 exploded();
                 mainShip.PlaySound(deadSound);
+                await System.Threading.Tasks.Task.Delay(700);
+                SceneManager.LoadScene("TryAgain");
+
             }
         }
         else
