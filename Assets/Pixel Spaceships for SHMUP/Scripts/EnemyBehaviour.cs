@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
 
+    public float hp;
+
     public float bulletPerSec = 1;
 
     private float perSecShot;
@@ -13,6 +15,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     private float counter = 0f;
     AudioSource audioSource;
+
+    public BloodbarBehaviour HpBar;
+
     void Start()
     {
         GetComponent<Animator>().enabled = false;
@@ -36,11 +41,16 @@ public class EnemyBehaviour : MonoBehaviour
         GameObject bull = Instantiate(bullet, transform.position, Quaternion.identity);
     }
 
-    public async void Explodes()
+    public async void Explodes(float damage)
     {
-        GetComponent<Animator>().enabled = true;
-        await System.Threading.Tasks.Task.Delay(700);
-        Destroy(gameObject);
+        hp -= damage;
+        HpBar.DamagedBy(damage);
+        if (hp <= 0)
+        {
+            GetComponent<Animator>().enabled = true;
+            await System.Threading.Tasks.Task.Delay(700);
+            Destroy(gameObject);
+        }
     }
 
     public void PlaySound(AudioClip clip)

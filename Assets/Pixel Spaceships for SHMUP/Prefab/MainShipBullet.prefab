@@ -102,8 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 4.5
   isEnemyBullet: 0
+  damage: 30
   fallingSound: {fileID: 8300000, guid: 503698de1c0f4814d8e0d94f5e7944b4, type: 3}
-  fallingMain: {fileID: 8300000, guid: 9a4dc7253f162ce458654dd918220255, type: 3}
+  deadSound: {fileID: 0}
 --- !u!58 &5647140221537291759
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -40,6 +40,8 @@ public class MainShipBehaviour : MonoBehaviour
 
         audioSource.enabled = false;
 
+        hpBar.GetComponent<BloodbarBehaviour>().capacity = this.hp;
+
     }
 
     // Update is called once per frame
@@ -74,18 +76,20 @@ public class MainShipBehaviour : MonoBehaviour
         return mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    public async void Explodes()
+    public float hp;
+    public GameObject hpBar;
+    public async void Explodes(float damage)
     {
-        GetComponent<Animator>().enabled = true;
-        await System.Threading.Tasks.Task.Delay(700);
-        Destroy(gameObject);
-        isAlive = false;
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        FindObjectOfType<GameController>().EndGame();
-
+        hp -= damage;
+        hpBar.GetComponent<BloodbarBehaviour>().DamagedBy(damage);
+        if (hp <= 0)
+        {
+            GetComponent<Animator>().enabled = true;
+            await System.Threading.Tasks.Task.Delay(700);
+            Destroy(gameObject);
+            isAlive = false;
+            Debug.Log("Over " + hp);
+        }
     }
 
     public void PlaySound(AudioClip clip)

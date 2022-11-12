@@ -9,6 +9,8 @@ public class ProjectTileBehaviour : MonoBehaviour
 
     public bool isEnemyBullet;
 
+    public float damage;
+
     private Rigidbody2D rigidbody2D;
 
     private bool explode;
@@ -64,7 +66,9 @@ public class ProjectTileBehaviour : MonoBehaviour
             MainShipBehaviour mainShip = other.collider.GetComponent<MainShipBehaviour>();
             if (mainShip != null)
             {
-                mainShip.Explodes();
+                float damages = Random.Range(damage * 0.5f, damage * 1.1f);
+                Debug.Log(damages + " / " + damage);
+                mainShip.Explodes(damages);
                 exploded();
                 mainShip.PlaySound(deadSound);
             }
@@ -74,7 +78,7 @@ public class ProjectTileBehaviour : MonoBehaviour
             EnemyBehaviour enemy = other.collider.GetComponent<EnemyBehaviour>();
             if (enemy != null)
             {
-                enemy.Explodes();
+                enemy.Explodes(Random.Range(damage * 0.7f, damage * 1.2f));
                 exploded();
                 enemy.PlaySound(fallingSound);
                 Score.scoreValue += 5;
